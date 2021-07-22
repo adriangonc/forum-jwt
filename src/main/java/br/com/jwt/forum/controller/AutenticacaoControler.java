@@ -2,6 +2,7 @@ package br.com.jwt.forum.controller;
 
 import javax.validation.Valid;
 
+import br.com.jwt.forum.controller.dto.TokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,16 +28,14 @@ public class AutenticacaoControler {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form){
+	public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form){
 		UsernamePasswordAuthenticationToken login = form.converter();
 		
 		try {
 			Authentication authentication = authenticationManager.authenticate(login);
 			String token = tokenService.gerarToken(authentication);
-			System.out.println(token);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {
-			
 			return ResponseEntity.badRequest().build();
 		}
 	}

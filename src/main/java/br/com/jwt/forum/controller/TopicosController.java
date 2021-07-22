@@ -48,7 +48,7 @@ public class TopicosController {
 	@GetMapping
 	@Cacheable(value = CACHE_LISTA_TOPICOS)
 	public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
-			@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 1) Pageable paginacao) {
+			@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 5) Pageable paginacao) {
 
 		if (nomeCurso == null) {
 			Page<Topico> topicos = topicoRepository.findAll(paginacao);
