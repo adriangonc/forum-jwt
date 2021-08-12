@@ -59,7 +59,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	/** Configurações de recursos staticos, imgs, js, css etc... **/
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configurations/**", "/swagger-resources/**");
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
 	}
 	
 	//metodo para gerar hash da senha
